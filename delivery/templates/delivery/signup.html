@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealBite | Sign Up</title>
+
+    <link rel="stylesheet" href="{% static 'delivery/signup.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="left">
+        <h1>🍴 Meal<span>Bite</span></h1>
+
+        <h2>Create Account</h2>
+
+        <p>
+            Join MealBite and enjoy delicious food delivered to your doorstep.
+        </p>
+
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="Pizza">
+    </div>
+
+    <div class="right">
+
+        <form action="{% url 'signup' %}" method="POST">
+
+            {% csrf_token %}
+
+            <h2>Sign Up</h2>
+            
+
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
+
+            
+
+            <input type="email" name="email" placeholder="Email Address" required>
+
+            <input type="text" name="username" placeholder="Username" required>
+
+            <input type="text" name="mobile" placeholder="Mobile Number" required>
+
+            <textarea name="address" rows="4" placeholder="Enter your address" required></textarea>
+
+            <input type="password" name="password1" placeholder="Password" required>
+
+            <input type="password" name="password2" placeholder="Confirm Password" required>
+
+            <button type="submit">Create Account</button>
+
+            <p class="login-link">
+                Already have an account?
+                <a href="{% url 'open_signin' %}">Sign In</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
