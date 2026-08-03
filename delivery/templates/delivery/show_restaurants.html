@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealBite | All Restaurants</title>
+
+    <link rel="stylesheet" href="{% static 'delivery/show_restaurants.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🍴 All Restaurants</h1>
+
+    <div class="top-buttons">
+        <a href="{% url 'open_add_restaurant' %}" class="add-btn">
+            + Add Restaurant
+        </a>
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Restaurant</th>
+                <th>Owner</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>City</th>
+                <th>Cuisine</th>
+                <th>Opening</th>
+                <th>Closing</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for restaurant in restaurants %}
+        <tr>
+
+            <td>
+                {% if restaurant.image %}
+                    <img class="restaurant-img"
+                         src="{{ restaurant.image.url }}"
+                         alt="{{ restaurant.restaurant_name }}">
+                {% else %}
+                    <img class="restaurant-img"
+                         src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg"
+                         alt="Restaurant">
+                {% endif %}
+            </td>
+
+            <td>{{ restaurant.restaurant_name }}</td>
+            <td>{{ restaurant.owner_name }}</td>
+            <td>{{ restaurant.email }}</td>
+            <td>{{ restaurant.phone }}</td>
+            <td>{{ restaurant.city }}</td>
+            <td>{{ restaurant.cuisine }}</td>
+            <td>{{ restaurant.opening_time }}</td>
+            <td>{{ restaurant.closing_time }}</td>
+
+            <td>
+                <a href="#" class="edit-btn">Edit</a>
+                <a href="#" class="delete-btn">Delete</a>
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="10" style="text-align:center;">
+                No Restaurants Found.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

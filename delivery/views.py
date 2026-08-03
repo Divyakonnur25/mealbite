@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Customer
+from .models import Customer, Restaurant
 # Create your views here.
 def index(request):
     return render(request, "delivery/index.html")
@@ -136,3 +136,57 @@ def signin(request):
             })
 
     return render(request, "delivery/signin.html")
+
+
+
+def open_add_restaurant(request):
+    return render(request, "delivery/add_restaurants.html")
+
+
+
+
+def add_restaurant(request):
+    if request.method == "POST":
+
+        restaurant_name = request.POST.get("restaurant_name")
+        owner_name = request.POST.get("owner_name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        address = request.POST.get("address")
+        city = request.POST.get("city")
+        pincode = request.POST.get("pincode")
+        cuisine = request.POST.get("cuisine")
+        opening_time = request.POST.get("opening_time")
+        closing_time = request.POST.get("closing_time")
+        rating = request.POST.get("rating", 0)
+
+        image = request.FILES.get("image")
+
+        Restaurant.objects.create(
+            restaurant_name=restaurant_name,
+            owner_name=owner_name,
+            email=email,
+            phone=phone,
+            address=address,
+            city=city,
+            pincode=pincode,
+            cuisine=cuisine,
+            opening_time=opening_time,
+            closing_time=closing_time,
+            
+            image=image
+        )
+
+        return redirect("open_add_restaurant")
+
+    return redirect("open_add_restaurant")
+
+
+def open_show_restaurants(request):
+    restaurants = Restaurant.objects.all()
+
+    context = {
+        "restaurants": restaurants
+    }
+
+    return render(request, "delivery/show_restaurants.html", context)

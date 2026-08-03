@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Restaurant</title>
+
+    <link rel="stylesheet" href="{% static 'delivery/add_restaurants.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Add New Restaurant</h1>
+
+    <form action="{% url 'add_restaurant' %}"
+      method="POST"
+      enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="input-box">
+            <label>Restaurant Name</label>
+            <input type="text" name="restaurant_name" placeholder="Enter restaurant name" required>
+        </div>
+
+        <div class="input-box">
+            <label>Owner Name</label>
+            <input type="text" name="owner_name" placeholder="Enter owner name" required>
+        </div>
+
+        <div class="input-box">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter email" required>
+        </div>
+
+        <div class="input-box">
+            <label>Phone Number</label>
+            <input type="text" name="phone" placeholder="Enter phone number" required>
+        </div>
+
+        <div class="input-box">
+            <label>Address</label>
+            <textarea name="address" rows="4" placeholder="Enter restaurant address" required></textarea>
+        </div>
+
+        <div class="input-box">
+            <label>City</label>
+            <input type="text" name="city" placeholder="Enter city">
+        </div>
+
+        <div class="input-box">
+            <label>Pincode</label>
+            <input type="text" name="pincode" placeholder="Enter pincode">
+        </div>
+
+        <div class="input-box">
+            <label>Cuisine Type</label>
+            <input type="text" name="cuisine" placeholder="Example: South Indian, Chinese">
+        </div>
+
+        <div class="input-box">
+            <label>Opening Time</label>
+            <input type="time" name="opening_time">
+        </div>
+
+        <div class="input-box">
+            <label>Closing Time</label>
+            <input type="time" name="closing_time">
+        </div>
+
+        <div class="input-box">
+            <label>Restaurant Image</label>
+            <input type="file" name="image">
+        </div>
+
+        <button type="submit">Add Restaurant</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
