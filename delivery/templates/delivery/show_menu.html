@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurant.restaurant_name }} Menu</title>
+
+    <link rel="stylesheet" href="{% static 'delivery/show_menu.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>{{ restaurant.restaurant_name }} Menu</h1>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for menu in menus %}
+            <tr>
+
+                <td>
+                    {% if menu.image %}
+                        <img src="{{ menu.image }}" alt="{{ menu.item_name }}" class="menu-img">
+                    {% else %}
+                        <img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg"
+                             alt="Food Image"
+                             class="menu-img">
+                    {% endif %}
+                </td>
+
+                <td>{{ menu.item_name }}</td>
+                <td>{{ menu.category }}</td>
+                <td>₹{{ menu.price }}</td>
+                <td>{{ menu.description }}</td>
+
+                <td>
+                    <a href="{% url 'add_to_cart' menu.id %}" class="cart-btn">
+    Add to Cart
+</a>
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="6" class="empty-message">
+                    No Menu Items Available
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <br>
+
+    <a href="{% url 'customer_home' %}" class="back-btn">
+        ← Back to Restaurants
+    </a>
+
+</div>
+
+</body>
+
+</html>

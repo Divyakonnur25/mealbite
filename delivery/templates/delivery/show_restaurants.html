@@ -22,7 +22,6 @@
     </div>
 
     <table>
-
         <thead>
             <tr>
                 <th>Image</th>
@@ -46,7 +45,7 @@
             <td>
                 {% if restaurant.image %}
                     <img class="restaurant-img"
-                         src="{{ restaurant.image.url }}"
+                         src="{{ restaurant.image }}"
                          alt="{{ restaurant.restaurant_name }}">
                 {% else %}
                     <img class="restaurant-img"
@@ -64,9 +63,21 @@
             <td>{{ restaurant.opening_time }}</td>
             <td>{{ restaurant.closing_time }}</td>
 
-            <td>
-                <a href="#" class="edit-btn">Edit</a>
-                <a href="#" class="delete-btn">Delete</a>
+            <td class="action-buttons">
+
+                <a href="{% url 'open_update_restaurant' restaurant.id %}" class="edit-btn">
+                    Edit
+                </a>
+
+                <a href="{% url 'delete_restaurant' restaurant.id %}"
+                   class="delete-btn"
+                   onclick="return confirm('Are you sure you want to delete this restaurant?')">
+                    Delete
+                </a>
+                <a href="{% url 'open_add_menu' restaurant.id %}" class="menu-btn">
+    Add Menu
+</a>
+
             </td>
 
         </tr>

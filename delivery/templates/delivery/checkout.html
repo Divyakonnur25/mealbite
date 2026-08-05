@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealBite | Checkout</title>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#f5f5f5;
+            padding:40px;
+        }
+
+        .container{
+            width:90%;
+            max-width:1100px;
+            margin:auto;
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 0 15px rgba(0,0,0,.1);
+        }
+
+        h1{
+            text-align:center;
+            color:#ff5722;
+            margin-bottom:30px;
+        }
+
+        h2{
+            color:#333;
+            margin-bottom:15px;
+        }
+
+        .section{
+            margin-bottom:35px;
+        }
+
+        label{
+            display:block;
+            margin-top:15px;
+            margin-bottom:6px;
+            font-weight:bold;
+        }
+
+        input,
+        textarea{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:15px;
+        }
+
+        textarea{
+            resize:none;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        table th{
+            background:#ff5722;
+            color:white;
+            padding:12px;
+        }
+
+        table td{
+            padding:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        }
+
+        .total-box{
+            margin-top:25px;
+            text-align:right;
+        }
+
+        .total-box h2{
+            color:#ff5722;
+        }
+
+        .pay-btn{
+
+            width:100%;
+            padding:16px;
+
+            background:#28a745;
+
+            color:white;
+
+            border:none;
+
+            border-radius:8px;
+
+            font-size:20px;
+
+            cursor:pointer;
+
+            margin-top:30px;
+        }
+
+        .pay-btn:hover{
+            background:#1f8b38;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Checkout</h1>
+
+<div class="section">
+
+<h2>Customer Details</h2>
+
+<label>Username</label>
+
+<input
+type="text"
+value="{{ customer.username }}"
+readonly>
+
+<label>Email</label>
+
+<input
+type="email"
+value="{{ customer.email }}"
+readonly>
+
+<label>Mobile</label>
+
+<input
+type="text"
+value="{{ customer.mobile }}"
+readonly>
+
+</div>
+
+
+<div class="section">
+
+<h2>Delivery Address</h2>
+
+<label>Address</label>
+
+<textarea
+id="address"
+rows="4">{{ customer.address }}</textarea>
+
+</div>
+
+
+<div class="section">
+
+<h2>Order Summary</h2>
+
+<table>
+
+<tr>
+
+<th>Food Item</th>
+
+<th>Price</th>
+
+<th>Qty</th>
+
+<th>Total</th>
+
+</tr>
+
+{% for item in cart_items %}
+
+<tr>
+
+<td>{{ item.menu.item_name }}</td>
+
+<td>₹{{ item.menu.price }}</td>
+
+<td>{{ item.quantity }}</td>
+
+<td>₹{{ item.total }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<div class="total-box">
+
+<h2>Grand Total : ₹{{ total_price }}</h2>
+
+</div>
+
+</div>
+
+
+<button id="rzp-button" class="pay-btn">
+
+Pay ₹{{ total_price }} with Razorpay
+
+</button>
+
+</div>
+
+
+
+<script>
+
+var options={
+
+key:"{{ razorpay_key }}",
+
+amount:"{{ amount }}",
+
+currency:"INR",
+
+name:"MealBite",
+
+description:"Food Order Payment",
+
+order_id:"{{ order_id }}",
+
+handler:function(response){
+
+alert("Payment Successful!");
+
+window.location.href="{% url 'customer_home' %}";
+
+},
+
+prefill:{
+
+name:"{{ customer.username }}",
+
+email:"{{ customer.email }}",
+
+contact:"{{ customer.mobile }}"
+
+},
+
+notes:{
+
+address:document.getElementById("address").value
+
+},
+
+theme:{
+
+color:"#ff5722"
+
+}
+
+};
+
+var rzp=new Razorpay(options);
+
+document.getElementById("rzp-button").onclick=function(e){
+
+options.notes.address=document.getElementById("address").value;
+
+rzp.open();
+
+e.preventDefault();
+
+};
+
+</script>
+
+</body>
+</html>

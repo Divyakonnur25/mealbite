@@ -1,0 +1,127 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Update Restaurant</title>
+
+    <link rel="stylesheet" href="{% static 'delivery/update_restaurant.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Update Restaurant</h1>
+
+
+    <form action="{% url 'update_restaurant' restaurant.id %}" method="POST">
+
+        {% csrf_token %}
+
+
+        <div class="input-box">
+            <label>Restaurant Name</label>
+            <input type="text"
+                   name="restaurant_name"
+                   value="{{ restaurant.restaurant_name }}"
+                   required>
+        </div>
+
+
+        <div class="input-box">
+            <label>Owner Name</label>
+            <input type="text"
+                   name="owner_name"
+                   value="{{ restaurant.owner_name }}"
+                   required>
+        </div>
+
+
+        <div class="input-box">
+            <label>Email</label>
+            <input type="email"
+                   name="email"
+                   value="{{ restaurant.email }}"
+                   required>
+        </div>
+
+
+        <div class="input-box">
+            <label>Phone</label>
+            <input type="text"
+                   name="phone"
+                   value="{{ restaurant.phone }}"
+                   required>
+        </div>
+
+
+        <div class="input-box">
+            <label>Address</label>
+            <textarea name="address" rows="4">{{ restaurant.address }}</textarea>
+        </div>
+
+
+        <div class="input-box">
+            <label>City</label>
+            <input type="text"
+                   name="city"
+                   value="{{ restaurant.city }}">
+        </div>
+
+
+        <div class="input-box">
+            <label>Pincode</label>
+            <input type="text"
+                   name="pincode"
+                   value="{{ restaurant.pincode }}">
+        </div>
+
+
+        <div class="input-box">
+            <label>Cuisine</label>
+            <input type="text"
+                   name="cuisine"
+                   value="{{ restaurant.cuisine }}">
+        </div>
+
+
+        <div class="input-box">
+            <label>Opening Time</label>
+            <input type="time"
+                   name="opening_time"
+                   value="{{ restaurant.opening_time|time:'H:i' }}">
+        </div>
+
+
+        <div class="input-box">
+            <label>Closing Time</label>
+            <input type="time"
+                   name="closing_time"
+                   value="{{ restaurant.closing_time|time:'H:i' }}">
+        </div>
+
+
+        <div class="input-box">
+            <label>Restaurant Image URL</label>
+            <input type="url"
+                   name="image"
+                   value="{{ restaurant.image }}">
+        </div>
+
+
+        <button type="submit">
+            Update Restaurant
+        </button>
+
+
+    </form>
+
+</div>
+
+
+</body>
+</html>

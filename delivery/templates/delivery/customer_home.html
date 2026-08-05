@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealBite | Customer Home</title>
+
+    <link rel="stylesheet" href="{% static 'delivery/customer_home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <h1>🍴 MealBite</h1>
+
+    <div class="nav-links">
+        <a href="{% url 'cart' %}">🛒 Cart</a>
+        <a href="#">📦 Orders</a>
+        <a href="/">Logout</a>
+    </div>
+
+</header>
+
+<div class="container">
+
+    <!-- Greeting Section -->
+    <div class="welcome-section">
+
+        <h2>
+            {{ greeting }}, {{ customer_name }} 👋
+        </h2>
+
+        <p>What are you craving today?</p>
+
+    </div>
+
+    <!-- Search -->
+    <div class="search-section">
+
+        <form method="GET">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="🔍 Search restaurants, dishes or cuisines..."
+                value="{{ request.GET.search }}"
+            >
+
+            <button type="submit">Search</button>
+
+        </form>
+
+    </div>
+
+    <!-- Categories -->
+    <div class="category-section">
+
+        <h3>🍽️ What's on your mind?</h3>
+
+        <div class="categories">
+
+            <a href="?category=Veg">🥗 Veg</a>
+
+            <a href="?category=Non Veg">🍗 Non Veg</a>
+
+            <a href="?category=Biriyani">🍛 Biriyani</a>
+
+            <a href="?category=Desserts">🍰 Desserts</a>
+
+            <a href="?category=Ice Cream">🍦 Ice Creams</a>
+
+            <a href="?category=Snacks">🥪 Snacks</a>
+
+            <a href="?category=Meals">🍱 Meals</a>
+
+            <a href="?category=Pizza">🍕 Pizza</a>
+
+            <a href="?category=Burger">🍔 Burgers</a>
+
+            <a href="?category=Chinese">🍜 Chinese</a>
+
+            <a href="?category=South Indian">🥘 South Indian</a>
+
+            <a href="?category=North Indian">🍛 North Indian</a>
+
+            <a href="?category=Juice">🥤 Juices</a>
+
+            <a href="?category=Beverages">☕ Beverages</a>
+
+        </div>
+
+    </div>
+
+    <!-- Restaurant Section -->
+
+    <h2 class="restaurant-title">Available Restaurants</h2>
+
+    <div class="restaurant-grid">
+
+        {% for restaurant in restaurants %}
+
+        <div class="card">
+
+            {% if restaurant.image %}
+                <img src="{{ restaurant.image }}" alt="{{ restaurant.restaurant_name }}">
+            {% else %}
+                <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg" alt="Restaurant">
+            {% endif %}
+
+            <div class="card-body">
+
+                <h3>{{ restaurant.restaurant_name }}</h3>
+
+                <p>
+                    <strong>Owner:</strong>
+                    {{ restaurant.owner_name }}
+                </p>
+
+                <p>
+                    <strong>City:</strong>
+                    {{ restaurant.city }}
+                </p>
+
+                <p>
+                    <strong>Cuisine:</strong>
+                    {{ restaurant.cuisine }}
+                </p>
+
+                <p>
+                    <strong>Time:</strong>
+                    {{ restaurant.opening_time }}
+                    -
+                    {{ restaurant.closing_time }}
+                </p>
+
+                <a href="{% url 'show_menu' restaurant.id %}" class="menu-btn">
+                    View Menu
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="no-restaurants">
+
+            <h3>No restaurants found.</h3>
+
+            <p>Try another search or category.</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -4,134 +4,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MealBite</title>
+    <title>MealBite | Food Delivery</title>
 
     <link rel="stylesheet" href="{% static 'delivery/styletheme.css' %}">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<!-- ================= NAVBAR ================= -->
+
 <header>
 
-    <nav>
+<nav>
 
-        <div class="logo">
-            🍴 Meal<span>Bite</span>
-        </div>
+<div class="logo">
+🍴 Meal<span>Bite</span>
+</div>
 
-        <ul>
+<ul>
 
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Menu</a></li>
-            <li><a href="#">Offers</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+<li><a href="#">Home</a></li>
+<li><a href="#">Restaurants</a></li>
+<li><a href="#">Categories</a></li>
+<li><a href="#">Offers</a></li>
+<li><a href="#">Contact</a></li>
 
-        </ul>
+</ul>
 
-        <div class="buttons">
+<div class="buttons">
 
-            <a href="{% url 'open_signin' %}" class="login">Sign In</a>
+<a href="{% url 'open_signin' %}" class="login">Sign In</a>
 
-            <a href="{% url 'open_signup' %}" class="signup">Sign Up</a>
+<a href="{% url 'open_signup' %}" class="signup">Sign Up</a>
 
-        </div>
+</div>
 
-    </nav>
+</nav>
 
 </header>
 
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
-    <div class="left">
+<div class="left">
 
-        <h1>
-            Delicious Food
-            <br>
-            Delivered To
-            <span>Your Door</span>
-        </h1>
+<h1>
 
-        <p>
+Fresh Food
 
-            Order delicious meals from your favourite restaurants.
-            Fast delivery, fresh ingredients, and amazing offers every day.
+<br>
 
-        </p>
+Delivered To
 
-        <div class="hero-btn">
+<span>Your Door</span>
 
-            <button class="order">Order Now</button>
+</h1>
 
-            <button class="menu">Explore Menu</button>
+<p>
 
-        </div>
+Order delicious meals from the best restaurants near you.
+Fast Delivery • Fresh Food • Great Offers
 
-    </div>
+</p>
 
-    <div class="right">
+<div class="search">
 
-        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="Pizza">
+<input type="text" placeholder="Search food or restaurant">
 
-    </div>
+<button>Search</button>
 
-</section>
+</div>
 
+</div>
 
+<div class="right">
 
-<section class="features">
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800">
 
-    <div class="box">
-
-        <h2>🚀 Fast Delivery</h2>
-
-        <p>Hot food delivered within 30 minutes.</p>
-
-    </div>
-
-    <div class="box">
-
-        <h2>🍕 Fresh Food</h2>
-
-        <p>Prepared using fresh ingredients every day.</p>
-
-    </div>
-
-    <div class="box">
-
-        <h2>💳 Easy Payment</h2>
-
-        <p>Pay securely using cards or UPI.</p>
-
-    </div>
+</div>
 
 </section>
 
+<!-- ================= CATEGORIES ================= -->
+
+<section class="categories">
+
+<h2>Browse Categories</h2>
+
+<div class="category-box">
+
+<div class="category">🍕<p>Pizza</p></div>
+
+<div class="category">🍔<p>Burger</p></div>
+
+<div class="category">🍗<p>Chicken</p></div>
+
+<div class="category">🍜<p>Noodles</p></div>
+
+<div class="category">🥗<p>Healthy</p></div>
+
+<div class="category">🍰<p>Desserts</p></div>
+
+</div>
+
+</section>
+
+<!-- ================= POPULAR DISHES ================= -->
 
 <section class="popular">
 
-<h1>🔥 Popular Dishes</h1>
+<h2>🔥 Popular Dishes</h2>
 
 <div class="cards">
 
 <div class="card">
 
-<img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500">
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500">
 
 <h3>Cheese Pizza</h3>
 
-<p>★★★★★</p>
+<p>⭐⭐⭐⭐⭐</p>
 
 <h4>$12.99</h4>
 
-<button>Order</button>
+<button>Order Now</button>
 
 </div>
-
-
 
 <div class="card">
 
@@ -139,15 +139,13 @@
 
 <h3>Chicken Burger</h3>
 
-<p>★★★★★</p>
+<p>⭐⭐⭐⭐⭐</p>
 
 <h4>$8.99</h4>
 
-<button>Order</button>
+<button>Order Now</button>
 
 </div>
-
-
 
 <div class="card">
 
@@ -155,11 +153,11 @@
 
 <h3>Italian Pasta</h3>
 
-<p>★★★★★</p>
+<p>⭐⭐⭐⭐⭐</p>
 
 <h4>$10.99</h4>
 
-<button>Order</button>
+<button>Order Now</button>
 
 </div>
 
@@ -167,12 +165,181 @@
 
 </section>
 
+<!-- ================= RESTAURANTS ================= -->
+
+<section class="restaurants">
+
+<h2>Featured Restaurants</h2>
+
+<div class="restaurant-grid">
+
+<div class="restaurant">
+
+<img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500">
+
+<h3>Pizza Palace</h3>
+
+<p>20-30 min</p>
+
+</div>
+
+<div class="restaurant">
+
+<img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=500">
+
+<h3>Burger House</h3>
+
+<p>15-25 min</p>
+
+</div>
+
+<div class="restaurant">
+
+<img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500">
+
+<h3>Italian Kitchen</h3>
+
+<p>30 min</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= OFFER ================= -->
+
+<section class="offer">
+
+<h1>🎉 50% OFF</h1>
+
+<p>On your first order using MealBite</p>
+
+<button>Claim Offer</button>
+
+</section>
+
+<!-- ================= REVIEWS ================= -->
+
+<section class="reviews">
+
+<h2>Happy Customers</h2>
+
+<div class="review-box">
+
+<div class="review">
+
+⭐⭐⭐⭐⭐
+
+<p>
+
+Amazing food and quick delivery.
+
+</p>
+
+<b>- Sarah</b>
+
+</div>
+
+<div class="review">
+
+⭐⭐⭐⭐⭐
+
+<p>
+
+Best food ordering website.
+
+</p>
+
+<b>- John</b>
+
+</div>
+
+<div class="review">
+
+⭐⭐⭐⭐⭐
+
+<p>
+
+Very delicious meals.
+
+</p>
+
+<b>- Emma</b>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= DOWNLOAD ================= -->
+
+<section class="download">
+
+<h2>Download Our App</h2>
+
+<p>Available on Android and iOS</p>
+
+<button>📱 Google Play</button>
+
+<button>🍎 App Store</button>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-<h3>MealBite © 2026</h3>
+<div class="footer">
 
-<p>Fresh Food • Fast Delivery • Happy Customers ❤️</p>
+<div>
+
+<h2>🍴 MealBite</h2>
+
+<p>
+
+Fresh Food Delivered Everyday
+
+</p>
+
+</div>
+
+<div>
+
+<h3>Quick Links</h3>
+
+<p>Home</p>
+
+<p>Restaurants</p>
+
+<p>Offers</p>
+
+<p>Contact</p>
+
+</div>
+
+<div>
+
+<h3>Follow Us</h3>
+
+<p>Facebook</p>
+
+<p>Instagram</p>
+
+<p>Twitter</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="copy">
+
+© 2026 MealBite. All Rights Reserved.
+
+</p>
 
 </footer>
 

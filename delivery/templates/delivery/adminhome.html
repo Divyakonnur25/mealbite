@@ -1,20 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Home</title>
+    <title>MealBite | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="{% static 'delivery/admin_home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Welcome to the Admin Home Page</h1>
-    <a href="{% url 'open_add_restaurant' %}"> Add New Restaurant</a>
-    <br>
-    <a href="{% url 'open_show_restaurants' %}"> View All Restaurants</a>
-    <br>
-    
+
+<header>
+    <h2>🍴 MealBite Admin</h2>
+</header>
+
+<div class="container">
+    <h1>Welcome, Admin 👋</h1>
+    <p>Manage restaurants and keep your food delivery platform up to date.</p>
+
+    <div class="cards">
+
+        <a href="{% url 'open_add_restaurant' %}" class="card">
+            <h2>➕ Add Restaurant</h2>
+            <p>Create a new restaurant.</p>
+        </a>
+
+        <a href="{% url 'open_show_restaurants' %}" class="card">
+            <h2>🍽 View Restaurants</h2>
+            <p>View and manage all restaurants.</p>
+        </a>
+
+    </div>
+</div>
+
 </body>
 </html>
-
-
-
-
