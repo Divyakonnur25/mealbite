@@ -69,13 +69,16 @@ Fast Delivery • Fresh Food • Great Offers
 
 </p>
 
-<div class="search">
+<form class="search" method="GET" action="{% url 'index' %}">
+    <input
+        type="text"
+        name="search"
+        value="{{ search }}"
+        placeholder="Search food or restaurant"
+    >
 
-<input type="text" placeholder="Search food or restaurant">
-
-<button>Search</button>
-
-</div>
+    <button type="submit">Search</button>
+</form>
 
 </div>
 

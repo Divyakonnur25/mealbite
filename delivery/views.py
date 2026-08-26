@@ -1,9 +1,29 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Customer, Restaurant,Menu,Cart
+from django.db.models import Q
+from .models import Customer, Restaurant, Menu, Cart
 # Create your views here.
 def index(request):
-    return render(request, "delivery/index.html")
+    search = request.GET.get("search", "").strip()
+
+    restaurants = Restaurant.objects.all()
+
+    if search:
+        restaurants = restaurants.filter(
+            Q(restaurant_name__icontains=search) |
+            Q(cuisine__icontains=search) |
+            Q(menus__item_name__icontains=search) |
+            Q(menus__category__icontains=search)
+        ).distinct()
+
+    return render(
+        request,
+        "delivery/index.html",
+        {
+            "restaurants": restaurants,
+            "search": search,
+        }
+    )
 def open_signup(request):
     return render(request,"delivery/signup.html")
 
@@ -411,8 +431,10 @@ def add_to_cart(request, menu_id):
     menu = get_object_or_404(Menu, id=menu_id)
 
     customer = Customer.objects.get(
-    id=request.session["customer_id"]
-)
+        id=request.session["customer_id"]
+    )
+
+    quantity = int(request.GET.get("quantity", 1))
 
     cart_item = Cart.objects.filter(
         customer=customer,
@@ -420,17 +442,16 @@ def add_to_cart(request, menu_id):
     ).first()
 
     if cart_item:
-        cart_item.quantity += 1
+        cart_item.quantity += quantity
         cart_item.save()
     else:
         Cart.objects.create(
             customer=customer,
             menu=menu,
-            quantity=1
+            quantity=quantity
         )
 
     return redirect("cart")
-
 def cart(request):
 
     customer = Customer.objects.get(
