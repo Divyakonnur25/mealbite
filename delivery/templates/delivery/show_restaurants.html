@@ -43,16 +43,17 @@
         <tr>
 
             <td>
-                {% if restaurant.image %}
-                    <img class="restaurant-img"
-                         src="{{ restaurant.image }}"
-                         alt="{{ restaurant.restaurant_name }}">
-                {% else %}
-                    <img class="restaurant-img"
-                         src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg"
-                         alt="Restaurant">
-                {% endif %}
-            </td>
+    {% if restaurant.image %}
+        <img class="restaurant-img"
+             src="{{ restaurant.image }}"
+             alt="{{ restaurant.restaurant_name }}"
+             onerror="this.onerror=null; this.src='https://placehold.co/300x200?text=Image+Unavailable';">
+    {% else %}
+        <img class="restaurant-img"
+             src="https://placehold.co/300x200?text=No+Image"
+             alt="No restaurant image">
+    {% endif %}
+</td>
 
             <td>{{ restaurant.restaurant_name }}</td>
             <td>{{ restaurant.owner_name }}</td>

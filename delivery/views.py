@@ -162,6 +162,8 @@ def signin(request):
 
 
 
+
+    # Keep your existing add-to-cart logic below this point
 def open_add_restaurant(request):
     return render(request, "delivery/add_restaurants.html")
 
@@ -428,14 +430,21 @@ def cart(request):
 
 def add_to_cart(request, menu_id):
 
+    # Check whether customer is logged in
+    customer_id = request.session.get("customer_id")
+
+    if not customer_id:
+        return redirect("open_signin")
+
+    # Get menu item
     menu = get_object_or_404(Menu, id=menu_id)
 
-    customer = Customer.objects.get(
-        id=request.session["customer_id"]
-    )
+    # Get logged-in customer
+    customer = get_object_or_404(Customer, id=customer_id)
 
     quantity = int(request.GET.get("quantity", 1))
 
+    # Check whether item already exists in cart
     cart_item = Cart.objects.filter(
         customer=customer,
         menu=menu
